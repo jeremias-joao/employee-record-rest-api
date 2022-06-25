@@ -38,7 +38,7 @@ public class EmployeeController {
 	private EmployeeService employeeService;
 
 	@GetMapping("/find-all")
-	@Cacheable(value = "listAll") 
+	@Cacheable(value = "listAll")
 	public ResponseEntity<Page<EmployeeEntity>> getAllEmployees(
 			@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable paginas)
 			throws NotFoundException {
@@ -53,7 +53,7 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/{id}")
-	@Cacheable(value = "findById") 
+	@Cacheable(value = "findById")
 	public ResponseEntity<Object> getEmployeeById(@PathVariable(value = "id") Long id) throws NotFoundException {
 		Optional<EmployeeEntity> employeEntityOptional = employeeService.findById(id);
 		if (!employeEntityOptional.isPresent()) {
@@ -65,7 +65,7 @@ public class EmployeeController {
 	}
 
 	@PostMapping("/save")
-	@CacheEvict(value = "save", allEntries = true) 
+	@CacheEvict(value = "save", allEntries = true)
 	public ResponseEntity<EmployeeEntity> salvar(@RequestBody EmployeeEntity employee) {
 		try {
 			EmployeeEntity employeeSave = employeeService.save(employee);
@@ -79,19 +79,21 @@ public class EmployeeController {
 	}
 
 	@PutMapping("/update/{id}")
-	@CacheEvict(value = "update", allEntries = true) 
+	@CacheEvict(value = "update", allEntries = true)
 	public ResponseEntity<?> atualizar(@RequestBody EmployeeEntity employee, Long id) {
 
 		Optional<EmployeeEntity> employeeOptional = employeeService.findById(id);
 		if (!employeeOptional.isPresent()) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("EMPLOYEE WITH ID {} " + id + " NOT FOUND");
 		}
+		logger.info("EMPLOYEE WITH ID {} " + id + " UPDATE SUCESSUFLY");
 		EmployeeEntity employeeUpdate = employeeService.update(employee);
 
 		return new ResponseEntity<>(employeeUpdate, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/delete/{id}")
+	@CacheEvict(value = "delete", allEntries = true)
 	public ResponseEntity<Object> deleteFunc(@PathVariable(value = "id") Long id) throws NotFoundException {
 		Optional<EmployeeEntity> employee = employeeService.findById(id);
 		if (!employee.isPresent()) {

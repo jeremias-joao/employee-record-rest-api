@@ -2,25 +2,54 @@ package br.com.magnasistemas.dto;
 
 import java.io.Serializable;
 
-import br.com.magnasistemas.entity.AddressEntity;
-import br.com.magnasistemas.entity.CompanyEntity;
-import br.com.magnasistemas.entity.DepartmentEntity;
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
 
 public class EmployeeDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	private Long id;
+
+	@NotNull
+	@Length(max = 80)
 	private String name;
 
+	@NotNull
+	@Length(max = 25)
+	@Email
 	private String email;
 
+	@NotNull
+	@Length(max = 2)
 	private int age;
 
+	@NotNull
+	@Length(max = 1, min = 1)
 	private String sex;
 
-	private CompanyEntity company;
-	private AddressEntity address;
-	private DepartmentEntity department;
+	@Valid
+	private CompanyDto company;
+
+	@Valid
+	private AddressDto address;
+
+	@Valid
+	private DepartmentDto department;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public EmployeeDto() {
+	}
 
 	public String getName() {
 		return name;
@@ -54,27 +83,27 @@ public class EmployeeDto implements Serializable {
 		this.sex = sex;
 	}
 
-	public CompanyEntity getCompany() {
+	public CompanyDto getCompany() {
 		return company;
 	}
 
-	public void setCompany(CompanyEntity company) {
+	public void setCompany(CompanyDto company) {
 		this.company = company;
 	}
 
-	public AddressEntity getAddress() {
+	public AddressDto getAddress() {
 		return address;
 	}
 
-	public void setAddress(AddressEntity address) {
+	public void setAddress(AddressDto address) {
 		this.address = address;
 	}
 
-	public DepartmentEntity getDepartment() {
+	public DepartmentDto getDepartment() {
 		return department;
 	}
 
-	public void setDepartment(DepartmentEntity department) {
+	public void setDepartment(DepartmentDto department) {
 		this.department = department;
 	}
 
