@@ -58,5 +58,8 @@
 DIAGRAMA MODELO LOGICO RELACINAMENTO ENTRE ENTIDADES
 https://drive.google.com/file/d/1BU9ihpbUeSR-70wnzjxbKj7Xw1SaGpO4/view?usp=sharing
 
+SWAGGER
+https://drive.google.com/file/d/1j6PUaVyGkPNTgHQxu49Sljj0Fb_aS7Ho/view?usp=sharing
+
 PARA TESTAR OS END POINT SWAGGER
 http://localhost:8080/swagger-ui/index.html
