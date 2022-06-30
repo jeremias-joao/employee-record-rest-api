@@ -2,7 +2,6 @@ package br.com.magnasistemas.dto;
 
 import java.io.Serializable;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
@@ -14,31 +13,22 @@ public class EmployeeDto implements Serializable {
 
 	private Long id;
 
-	@NotNull
-	@Length(max = 80)
 	private String name;
 
-	@NotNull
-	@Length(max = 25)
 	@Email
 	private String email;
 
 	@NotNull
-	@Length(max = 2)
 	private int age;
 
-	@NotNull
-	@Length(max = 1, min = 1)
+	@Length(max = 1)
 	private String sex;
 
-	@Valid
+	private DepartmentDto department;
+
 	private CompanyDto company;
 
-	@Valid
 	private AddressDto address;
-
-	@Valid
-	private DepartmentDto department;
 
 	public Long getId() {
 		return id;
@@ -46,9 +36,6 @@ public class EmployeeDto implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public EmployeeDto() {
 	}
 
 	public String getName() {
@@ -83,6 +70,14 @@ public class EmployeeDto implements Serializable {
 		this.sex = sex;
 	}
 
+	public DepartmentDto getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(DepartmentDto department) {
+		this.department = department;
+	}
+
 	public CompanyDto getCompany() {
 		return company;
 	}
@@ -97,14 +92,6 @@ public class EmployeeDto implements Serializable {
 
 	public void setAddress(AddressDto address) {
 		this.address = address;
-	}
-
-	public DepartmentDto getDepartment() {
-		return department;
-	}
-
-	public void setDepartment(DepartmentDto department) {
-		this.department = department;
 	}
 
 }

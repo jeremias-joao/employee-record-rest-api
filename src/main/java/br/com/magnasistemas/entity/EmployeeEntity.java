@@ -33,7 +33,7 @@ public class EmployeeEntity implements Serializable {
 	@Column(name = "EMAIL", nullable = false, length = 30)
 	private String email;
 
-	@Column(name = "AGE", nullable = false, length = 3)
+	@Column(name = "AGE", nullable = false /*length = 10*/)
 	private int age;
 
 	@Column(name = "SEX", nullable = false, length = 1)
