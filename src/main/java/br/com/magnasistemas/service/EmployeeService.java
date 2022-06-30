@@ -51,7 +51,7 @@ public class EmployeeService {
 
 	@Transactional
 	public void deleteById(Long id) {
-		logger.info("CONSULTANDO A EXISTENCIA DO FUNCIONARIO NO BANDO DE DADOS-");
+		logger.info("CONSULTANDO A EXISTENCIA DO FUNCIONARIO NO BANDO DE DADOS COM ID {} " + id);
 		findById(id);
 		logger.info("FUNCIONARIO  COM ID {} " + id + "ENCONTRADO COM SUCESSO");
 		repository.deleteById(id);
@@ -63,9 +63,9 @@ public class EmployeeService {
 
 	@Transactional
 	public EmployeeEntity update(EmployeeDto dto) {
-
+		logger.info("INICIANDO ATUALIZAÇÃO DO FUNCIONARIO COM id {} " + dto.getId());
 		findById(dto.getId());
-
+		logger.info("FUNCIONARIO COM ID {} " + dto.getId() + " ENCONTRADO COM SUCESSO");
 		EmployeeEntity entity = new EmployeeEntity();
 		entity = converterParaEntity(dto);
 
@@ -74,6 +74,7 @@ public class EmployeeService {
 
 	public EmployeeEntity converterParaEntity(EmployeeDto dto) {
 
+		logger.info("COMVERTENDO O DTO PARA ENTIDADE");
 		EmployeeEntity entity = new EmployeeEntity();
 
 		entity.setId(dto.getId());
@@ -108,6 +109,7 @@ public class EmployeeService {
 		entity.setCompany(companyEntity);
 		entity.setDepartment(departmentEntity);
 		entity.setAddress(addressEntity);
+		logger.info("DTO CONVETIDO PARA ENTIDADE");
 
 		return entity;
 

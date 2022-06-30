@@ -45,12 +45,12 @@ public class EmployeeController {
 			@PageableDefault(page = 0, size = 5, sort = "id", direction = Sort.Direction.ASC) Pageable paginas)
 			throws NotFoundException {
 		try {
-			logger.info("LISTING ALL EMPLOYEE SAVED");
+			logger.info("LISTANDO FUNCIONARIO TODOS CADSTRADOS");
 			return ResponseEntity.ok(employeeService.findAll(paginas));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.info("IT'S NOT POSSIBLE TO LIST ALL EMPLOYEE ");
+		logger.info("NAO FOI POSSIVEL LISTAR TODOS FUNCIONARIOS");
 		return null;
 	}
 
@@ -59,10 +59,10 @@ public class EmployeeController {
 	public ResponseEntity<Object> getEmployeeById(@PathVariable(value = "id") Long id) throws NotFoundException {
 		Optional<EmployeeEntity> employeEntityOptional = employeeService.findById(id);
 		if (!employeEntityOptional.isPresent()) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("EMPLOYEE WITH ID{} " + id + " NOT FOUND.");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("FUNCIONARIO COM ID{} " + id + " NAO ENCONTRADO.");
 		}
 
-		logger.info(" EMPLOYEE WITH ID {} " + id + " FOUND SUCESSUFLY");
+		logger.info(" FUNCIONARIO COM ID{} " + id + " ENCONTRADO COM SUCESSO");
 		return ResponseEntity.status(HttpStatus.OK).body(employeEntityOptional.get());
 	}
 
@@ -77,19 +77,19 @@ public class EmployeeController {
 	@PutMapping("/update/{id}")
 	@CacheEvict(value = "update", allEntries = true)
 	public ResponseEntity<Object> atualizar(@RequestBody EmployeeDto dto, Long id) {
-		logger.info("STARTING TO UPDATE EMPLOYEE");
+		logger.info("INICIANDO ATUALIZAÇÃO DO FUNCIONARIO COM id {} " + id);
 		EmployeeEntity employeeUpdate = employeeService.update(dto);
-		logger.info("EMPLOYEE WITH ID {} " + id + " UPDATE SUCESSUFLY");
+		logger.info("FUNCIONARIO COM ID {} " + id + " ATUALIZAÇÃO COM SUCESSO");
 		return new ResponseEntity<>(employeeUpdate, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/delete/{id}")
 	@CacheEvict(value = "delete", allEntries = true)
 	public ResponseEntity<Object> delete(@PathVariable Long id) {
-		logger.info("REMOVING EMPLOYEE");
+		logger.info("REMOVENDO O FUNCIONARIO COM ID {} " +id);
 		employeeService.deleteById(id);
-		logger.info("EMPLOYEE WITH ID {} " + id + " DELETED SUCESSUFLY");
-		return ResponseEntity.status(HttpStatus.OK).body("EMPLOYEE WITH ID {} " + id + " DELETED SUCESSUFLY");
+		logger.info("FUNCIONARIO COM ID {} " + id + " DELETEDO COM SUCESSO");
+		return ResponseEntity.status(HttpStatus.OK).body("FUNCIONARIO COM ID {} " + id + " DELETEDO COM SUCESSO");
 	}
 
 }
